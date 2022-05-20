@@ -6,23 +6,32 @@
 const express = require('express');  //load the library
 const app = express(); // create an object
 const port = process.env.PORT || 5000;
-// const data = require('./data/weather.json');
-
-// data.find(element );
-
-// app.get('/weather', (req, res) => {
-//   let lat=req.query.lat;
-//   let lon=req.query.lon;
-//   let searchQ=req.query.searchQ;
-//   res.send({ express: searchQ });
-// });
+const weatherData = require('./data/weather.json');
 
 /**
- *  catchall so place it last or it wil catch all the
- * requests.
+ * 
+ * @param {number} lat - latitude
+ * @param {number} lon - longitude
+ * @param {string} searchQ - city name
+ * @returns {array} -array of weather forecasts
  */
+function getCity(lat, lon ,searchQ){
+  const results = [];
+  for (let i=0; i< weatherData.length; i++){
+    if searchQ = ('Seattle' || 'Paris' || 'Amman'){
+    
+    }
+  }
+  return results;
+}
+
+
 app.get('/weather', (req, res) => {
-  res.send({ express: req.query.location });
+  let lat=req.query.lat;
+  let lon=req.query.lon;
+  let searchQ=req.query.searchQ;
+  let results = getCity(lat, lon, searchQ);
+  res.send({ express: results });
 });
 
 app.listen(port, () => {
