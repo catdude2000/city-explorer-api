@@ -19,10 +19,12 @@ app.get('/', (request, response)=>{
 
 app.get('/weather', (request, response) => {
   try {
+
+
     let dataRequest = request.query.data;
     let dataToInstantiate = data.find(weather => weather.dataRequest === dataRequest);
     let dataToSend = new Forecast(dataToInstantiate);
-    console.log(dataToSend,  'got back');
+    console.log(dataToSend, 'got back');
     response.status(200).send(dataToSend);
   } catch (error) {
     next(error);
@@ -30,15 +32,16 @@ app.get('/weather', (request, response) => {
 });
 
 
-function weatherHandler(request, response) {
+// function weatherHandler(request, response) {
 
-}
+// }
 
-class Forecast (date, description) {
-  constructor(forecastObject){
-    this.dataRequest = forecastObject.dataRequest;
-  }
-}
+// class Forecast (date, description) => {
+//   constructor(forecastObject);
+//    {
+//     this.dataRequest = forecastObject.dataRequest;
+//   }
+// };
 
 /////////////////////////////////////////////////
 
@@ -46,4 +49,4 @@ app.use((error, request, response, next) => {
   response.status(500).send(error.message);
 });
 
-app.listen(PORT, () => console.log(`Listening on PORT: ${PORT})`));
+app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
