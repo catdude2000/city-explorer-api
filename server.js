@@ -12,12 +12,12 @@ app.get('/', (request, response)=>{
   response.send('Hello from our server HOME route / !!');
 });
 
-// app.use('*', (request, response))
 
+
+//////////////////////////////////
 app.get('/weather', (request, response) => {
   try {
     let dataRequest = request.query.data;
-
     let dataToInstantiate = data.find(weather => weather.dataRequest === dataRequest);
     let dataToSend = new Forecast(dataToInstantiate);
     console.log(dataToSend,  'got back');
@@ -27,7 +27,8 @@ app.get('/weather', (request, response) => {
   }
 });
 
-class Forecast {
+
+class Forecast (date, description) {
   constructor(forecastObject){
     this.dataRequest = forecastObject.dataRequest;
   }
