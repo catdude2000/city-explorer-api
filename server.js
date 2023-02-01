@@ -28,12 +28,16 @@ app.get('/weather', (request, response) => {
 });
 
 
+function weatherHandler(request, response) {
+
+}
+
 class Forecast (date, description) {
   constructor(forecastObject){
     this.dataRequest = forecastObject.dataRequest;
   }
 }
-
+/////////////////////////////////////////////////
 app.use((error, request, response, next) => {
   response.status(500).send(error.message);
 });
