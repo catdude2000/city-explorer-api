@@ -15,6 +15,7 @@ app.get('/', (request, response)=>{
 
 
 //////////////////////////////////
+
 app.get('/weather', (request, response) => {
   try {
     let dataRequest = request.query.data;
@@ -37,7 +38,9 @@ class Forecast (date, description) {
     this.dataRequest = forecastObject.dataRequest;
   }
 }
+
 /////////////////////////////////////////////////
+
 app.use((error, request, response, next) => {
   response.status(500).send(error.message);
 });
