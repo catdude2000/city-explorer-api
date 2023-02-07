@@ -20,8 +20,6 @@ app.get('/', (request, response) => {
 
 app.get('/weather', async (request, response, next) => {
   try {
-    // console.log(request.query.searchQuery, 'request');
-
     // const weathUrl =  `http://api.weatherbit.io/v2.0/forecast/daily?city=Seattle&key=${WEATHER_API_KEY}`
     // let results = await axios.get(weathUrl)
     // let weatherData = await axios.get(weathUrl)
@@ -30,13 +28,16 @@ app.get('/weather', async (request, response, next) => {
     // let lon = request.query.lon;
     let searchQuery = request.query.searchQuery;
     console.log(searchQuery, 'searchquery');
-    let cityLat = data.find(ele => ele.lat === lat);
-    console.log(cityLat, 'citylat');
+
+    let weatherDataObject = data.find(ele => ele.city_name.toLocaleLowerCase() === searchQuery.toLocaleLowerCase());
+    console.log(weatherDataObject, 'weatherdataobj');
+    // let cityLat = data.find(ele => ele.lat === lat);
+    // console.log(cityLat, 'citylat');
     // let cityLon = data.find(ele => ele.lon === lon);
-    let citySearch = data.find(ele => ele.city_name === searchQuery);
-    console.log( citySearch, 'citysearch');
+    // let citySearch = data.find(ele => ele.city_name === searchQuery);
+    // console.log( citySearch, 'citysearch');
     // let citySearch = data.find(ele => console.log(ele.city_name, 'ele'));
-    // let dataTosend = new Forecast(cityLat, cityLon, searchQuery);
+    let dataTosend = weatherDataObject.data.map(forecast => new Forecast(forecast);
     // console.log(dataTosend, 'datatosend');
     // forecastDataToSend.data.map(forecast => new Forecast(cityLat, cityLon, citySearch));
     // response.status(200).send(dataTosend);
