@@ -14,7 +14,9 @@ app.get('/', (request, response) => {
   response.send('hello from the server.');
 });
 
+
 app.get('/weather', async (request, response, next) => {
+
   try {
     let searchQuery = request.query.searchQuery;
     let weatherDataObject = data.find(ele => ele.city_name.toLocaleLowerCase() === searchQuery.toLocaleLowerCase());
