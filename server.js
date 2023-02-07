@@ -32,15 +32,11 @@ app.get('/weather', async (request, response, next) => {
     let weatherDataObject = data.find(ele => ele.city_name.toLocaleLowerCase() === searchQuery.toLocaleLowerCase());
     console.log(weatherDataObject, 'weatherdataobj');
     // let cityLat = data.find(ele => ele.lat === lat);
-    // console.log(cityLat, 'citylat');
-    // let cityLon = data.find(ele => ele.lon === lon);
-    // let citySearch = data.find(ele => ele.city_name === searchQuery);
-    // console.log( citySearch, 'citysearch');
-    // let citySearch = data.find(ele => console.log(ele.city_name, 'ele'));
-    let dataTosend = weatherDataObject.data.map(forecast => new Forecast(forecast);
-    // console.log(dataTosend, 'datatosend');
-    // forecastDataToSend.data.map(forecast => new Forecast(cityLat, cityLon, citySearch));
-    // response.status(200).send(dataTosend);
+
+    let dataTosend = weatherDataObject.data.map(forecast => new Forecast(forecast));
+    console.log(dataTosend, 'datatosend');
+
+    response.status(200).send(dataTosend);
   } catch (error) {
     next (error);
   }
@@ -50,11 +46,11 @@ app.get('*', (request, response) => {
   response.send('The route was not found. Error 404');
 });
 
-// class Forecast{
-//   constructor(forecastObject) {
-//     this.date = forecastObject.date;
-//     this.description = forecastObject.description;
-//   }
-// }
+class Forecast{
+  constructor(forecastObject) {
+    this.date = forecastObject.datetime;
+    this.description = forecastObject.weather.description;
+  }
+}
 
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
