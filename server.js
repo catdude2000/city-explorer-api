@@ -10,6 +10,8 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3002;
 
+// let W_API_KEY = process.env.WEATHER_API_KEY;
+
 app.get('/', (request, response) => {
   response.send('hello from the server.');
 });
