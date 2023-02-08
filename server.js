@@ -14,6 +14,7 @@ app.get('/', (request, response) => {
   response.send('hello from the server.');
 });
 
+////////////change from data to api info
 app.get('/weather', async (request, response, next) => {
   try {
     let searchQuery = request.query.searchQuery;
@@ -25,7 +26,7 @@ app.get('/weather', async (request, response, next) => {
     next (error);
   }
 });
-
+////////////////////
 app.get('*', (request, response) => {
   response.send('The route was not found. Error 404');
 });
