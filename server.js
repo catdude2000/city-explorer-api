@@ -1,9 +1,10 @@
 'use strict';
 console.log('server is connected.');
-
+const axios = require('axios');
+////////^^^^^^correct?
 const express = require('express');
 require('dotenv').config();
-let data = require('./data/weather.json');
+// let data = require('./data/weather.json');
 const cors = require('cors');
 const app = express();
 app.use(cors());
@@ -19,8 +20,25 @@ app.get('/', (request, response) => {
 ////////////change from data to api info
 app.get('/weather', async (request, response, next) => {
   try {
-    let searchQuery = request.query.searchQuery;
-    let weatherDataObject = data.find(ele => ele.city_name.toLocaleLowerCase() === searchQuery.toLocaleLowerCase());
+
+    let searchQuery= request.query.searchQuery;
+
+    let lat = request.query.lat;
+    let lon= request.query.lon;
+
+    const url = `http://api.weatherbit.io/v2.0/forecast/daily?city=${searchQuery}&key=${process.env.WEATHER_API_KEY}&lat=${lat}&lon=${lon}&days=5&units=I`;
+    let weatherData = await axios.get(url);
+
+
+
+
+    // let weatherDataObject = request.query.searchQuery.toLocaleLowerCase();
+   
+
+    let weatherDataObject = weatherData.find(ele => ele.city_name.toLocaleLowerCase() === searchQuery);
+    console.log(weatherDataObject, 'weatherdtaobject');
+    ////^^^^^^^^^^^^^^^^replace?
+
     let dataTosend = weatherDataObject.data.map(forecast => new Forecast(forecast));
     // console.log(dataTosend, 'datatosend');
     response.status(200).send(dataTosend);
