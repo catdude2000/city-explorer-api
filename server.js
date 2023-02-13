@@ -17,14 +17,14 @@ app.get('/', (request, response) => {
   response.send('hello from the server.');
 });
 
-////////////change from data to api info
+
 app.get('/weather', async (request, response, next) => {
   try {
     // let searchQuery= request.query.searchQuery;
-    let lat = request.query.lat;
-    let lon= request.query.lon;
-
-    const url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${W_API_KEY}&lat=${lat}&lon=${lon}&days=5&units=I`;
+    // let lat = request.query.lat;
+    // let lon= request.query.lon;
+    const url = api.openweathermap.org/data/2.5/weather?q=${request.query.searchQuery},&APPID=${W_API_KEY}
+    // const url = `http://api.weatherbit.io/v2.0/forecast/daily?key=${W_API_KEY}&lat=${lat}&lon=${lon}&days=5&units=I`;
     console.log(url, 'url');
     let weatherData = await axios.get(url);
     // let weatherDataObject = request.query.searchQuery.toLocaleLowerCase();
