@@ -1,10 +1,8 @@
 'use strict';
 console.log('server is connected.');
 const axios = require('axios').default;
-////////^^^^^^correct?
 const express = require('express');
 require('dotenv').config();
-// let data = require('./data/weather.json');
 const cors = require('cors');
 const app = express();
 app.use(cors());
@@ -17,24 +15,17 @@ app.get('/', (request, response) => {
   response.send('hello from the server.');
 });
 
-
 app.get('/weather', async (request, response, next) => {
   try {
-    // const searchQuery= request.query.searchQuery;
-    // console.log(searchQuery, 'searchqy');
-    let lat = request.query.lat;
-    let lon= request.query.lon;
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${W_API_KEY}`;
-
-    console.log(url, 'url');
+    const searchQuery= request.query.city;
+    console.log(searchQuery, 'searchqy');
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchQuery}&appid=${W_API_KEY}`;
     let weatherData = await axios.get(url);
+    console.log(weatherData.data, 'weatherdata');
     // let weatherDataObject = request.query.searchQuery.toLocaleLowerCase();
-   
     // let weatherDataObject = weatherData.find(ele => ele.city_name.toLocaleLowerCase() === searchQuery);
     // console.log(weatherDataObject, 'weatherdtaobject');
-    ////^^^^^^^^^^^^^^^^replace?
-
-    let dataTosend = weatherData.map(forecast => new Forecast(forecast));
+    let dataTosend = weatherData.data.map(forecast => new Forecast(forecast));
     console.log(dataTosend, 'datatosend');
     response.status(200).send(dataTosend);
   } catch (error) {
@@ -51,6 +42,8 @@ class Forecast{
   constructor(forecastObject) {
     this.date = forecastObject.datetime;
     this.description = forecastObject.weather.description;
+    // this.coord = forecastObject.coord;
+    //Need different variable to match openweather?
   }
 }
 
