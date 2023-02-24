@@ -22,7 +22,7 @@ app.get('/weather', async (request, response, next) => {
     // console.log(searchQuery, 'searchqy');
     let url = `https://api.openweathermap.org/data/2.5/forecast?q=${searchQuery}&appid=${W_API_KEY}`;
     let weatherData = await axios.get(url);
-    console.log(weatherData.data.city, 'weatherdata');
+    // console.log(weatherData.data.city, 'weatherdata');
     let dataTosend = weatherData.data.city.map(forecast => new Forecast(forecast));
     console.log(dataTosend, 'datatosend');
     response.status(200).send(dataTosend);
@@ -35,9 +35,10 @@ app.get('/weather', async (request, response, next) => {
 app.get('/movies', async (request, response, next) => {
   try {
     const searchQuery = request.query.city;
-    let mUrl = `https://api.themoviedb.org/3/search/movie?${M_API_KEY}=###&query=${searchQuery} `;
-    console.log(mUrl, 'url');
+    let mUrl = `https://api.themoviedb.org/3/search/movie?api_key=${M_API_KEY}&query=${searchQuery}`;
+    // console.log(mUrl, 'url');
     let movieData = await axios.get(mUrl);
+    console.log(movieData.data, 'moviedata');
     let movieDataTosend = movieData.data.map(movie => new Movie(movie));
     console.log(movieDataTosend, 'moviedatatosend');
     response.status(200).send(movieDataTosend);
