@@ -37,9 +37,9 @@ Estimate of time needed to complete: 1 hour
 
 Start time: 6:10PM
 
-Finish time: _____
+Finish time: days later
 
-Actual time needed to complete: _____
+Actual time needed to complete: 8+ hours
 
 Name of feature: ________________________________
 
